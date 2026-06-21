@@ -304,7 +304,7 @@ function createStarsfield() {
     scene.add(stars);
 
     // Animate stars twinkling
-    animateTwinklingStars(starsGeometry);
+    animateTwinklingStars(stars);
 }
 
 function animateTwinklingStars(stars) {
@@ -395,7 +395,7 @@ function createPlanet(data, index) {
 
     } else if (data.name === 'Jupiter') {
         // Create Jupiter with storm bands
-        const jupiterGeometry = newnew THREE.SphereGeometry(data.scale, 64, 64);
+        const jupiterGeometry = new THREE.SphereGeometry(data.scale, 64, 64);
         const jupiterMaterial = new THREE.MeshPhongMaterial({
             color: data.color,
             shininess: 20,
