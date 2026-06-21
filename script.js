@@ -223,7 +223,7 @@ function initThreeJs() {
     renderer.setSize(CONFIG.width, CONFIG.height);
     renderer.setPixelRatio(CONFIG.pixelRatio);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowShadowMap;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.mapSize.width = CONFIG.shadowMapSize;
     renderer.shadowMap.mapSize.height = CONFIG.shadowMapSize;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -307,16 +307,17 @@ function createStarsfield() {
     animateTwinklingStars(starsGeometry);
 }
 
-function animateTwinklingStars(geometry) {
+function animateTwinklingStars(stars) {
     const originalOpacity = 0.8;
-    let twinkelIntensity = 0;
 
     setInterval(() => {
-        twinkelIntensity = Math.sin(Date.now() * 0.003) * 0.5 + 0.5;
-        geometry.material.opacity = originalOpacity * (twinkelIntensity * 0.5 + 0.5);
+        const twinkleIntensity =
+            Math.sin(Date.now() * 0.003) * 0.5 + 0.5;
+
+        stars.material.opacity =
+            originalOpacity * (twinkleIntensity * 0.5 + 0.5);
     }, 50);
 }
-
 // ============================================================
 // PLANET CREATION
 // ============================================================
@@ -336,12 +337,12 @@ function createPlanet(data, index) {
 
     if (data.name === 'Sun') {
         // Create Sun with glow effect
-        const sunGeometry = new THREE.SphereGeometry(data.scale, 128, 128);
-        const sunMaterial = new THREE.MeshBasicMaterial({
-            color: data.color,
-            emissive: data.color,
-            emissiveIntensity: 2
-        });
+        const sunGeometry = new THREE.SphereGeometry(data.scale, 64, 64);
+       const sunMaterial = new THREE.MeshPhongMaterial({
+    color: data.color,
+    emissive: data.color,
+    emissiveIntensity: 2
+});
         const sun = new THREE.Mesh(sunGeometry, sunMaterial);
         sun.castShadow = true;
         sun.receiveShadow = true;
@@ -378,7 +379,7 @@ function createPlanet(data, index) {
 
     } else if (data.name === 'Earth') {
         // Create Earth with clouds
-        const earthGeometry = new THREE.SphereGeometry(data.scale, 128, 128);
+        const earthGeometry = new THREE.SphereGeometry(data.scale, 64, 64);
         const earthMaterial = new THREE.MeshPhongMaterial({
             color: data.color,
             shininess: 50,
@@ -394,7 +395,7 @@ function createPlanet(data, index) {
 
     } else if (data.name === 'Jupiter') {
         // Create Jupiter with storm bands
-        const jupiterGeometry = new THREE.SphereGeometry(data.scale, 128, 128);
+        const jupiterGeometry = newnew THREE.SphereGeometry(data.scale, 64, 64);
         const jupiterMaterial = new THREE.MeshPhongMaterial({
             color: data.color,
             shininess: 20,
@@ -478,7 +479,7 @@ function createSaturnRings(group, scale) {
         emissive: 0x664433
     });
     const rings = new THREE.Mesh(ringGeometry, ringMaterial);
-    rings.rotation.x = 0.4;
+    rings.rotation.x = Math.PI * 0.4;
     rings.castShadow = true;
     rings.receiveShadow = true;
     group.add(rings);
