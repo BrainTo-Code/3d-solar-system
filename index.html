@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Interactive Solar System - Explore the Cosmos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <div class="rotating-ring"></div>
+                <span class="logo-text">COSMOS</span>
+            </div>
+            <p class="loading-text">Initializing space travel...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p class="loading-percent" id="loadingPercent">0%</p>
+        </div>
+    </div>
+
+    <!-- Canvas Container -->
+    <canvas id="canvas"></canvas>
+
+    <!-- UI Overlay -->
+    <div id="uiOverlay" class="ui-overlay">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🌌</span>
+                <h1>COSMOS</h1>
+            </div>
+            <div class="controls">
+                <button id="musicToggle" class="control-btn" title="Toggle music">
+                    <span class="icon">🔊</span>
+                </button>
+                <button id="fullscreenBtn" class="control-btn" title="Fullscreen">
+                    <span class="icon">⛶</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Information Panel -->
+        <div id="infoPanel" class="info-panel">
+            <div class="info-content">
+                <div class="info-header">
+                    <h2 id="planetName">Solar System</h2>
+                    <button id="closeInfo" class="close-btn">&times;</button>
+                </div>
+                <div class="info-body">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Diameter</span>
+                            <span class="info-value" id="infoDiameter">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Mass</span>
+                            <span class="info-value" id="infoMass">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Gravity</span>
+                            <span class="info-value" id="infoGravity">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Distance from Sun</span>
+                            <span class="info-value" id="infoDistance">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Avg Temperature</span>
+                            <span class="info-value" id="infoTemp">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Day Length</span>
+                            <span class="info-value" id="infoDayLength">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Year Length</span>
+                            <span class="info-value" id="infoYearLength">—</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Moons</span>
+                            <span class="info-value" id="infoMoons">—</span>
+                        </div>
+                    </div>
+                    <div class="info-fact">
+                        <h3>Fascinating Fact</h3>
+                        <p id="infoFact">Discover amazing facts about the celestial bodies in our solar system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <nav class="navigation">
+            <button id="prevBtn" class="nav-btn nav-prev" title="Previous planet">
+                <span>←</span>
+            </button>
+            <div class="planet-counter">
+                <span id="currentPlanet">1</span> / <span id="totalPlanets">9</span>
+            </div>
+            <button id="nextBtn" class="nav-btn nav-next" title="Next planet">
+                <span>→</span>
+            </button>
+        </nav>
+
+        <!-- Planet Selector Menu -->
+        <div id="planetMenu" class="planet-menu">
+            <button class="menu-toggle" id="menuToggle" title="Planet menu">
+                ☰
+            </button>
+            <div class="menu-content">
+                <h3>Explore Planets</h3>
+                <ul class="planet-list" id="planetList">
+                    <li><button class="planet-btn" data-index="0">☀️ Sun</button></li>
+                    <li><button class="planet-btn" data-index="1">☿️ Mercury</button></li>
+                    <li><button class="planet-btn" data-index="2">♀️ Venus</button></li>
+                    <li><button class="planet-btn" data-index="3">🌍 Earth</button></li>
+                    <li><button class="planet-btn" data-index="4">♂️ Mars</button></li>
+                    <li><button class="planet-btn" data-index="5">♃ Jupiter</button></li>
+                    <li><button class="planet-btn" data-index="6">♄ Saturn</button></li>
+                    <li><button class="planet-btn" data-index="7">♅ Uranus</button></li>
+                    <li><button class="planet-btn" data-index="8">♆ Neptune</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Scroll Hint -->
+        <div id="scrollHint" class="scroll-hint">
+            <span class="hint-text">Scroll or swipe to explore →</span>
+            <div class="hint-arrow">→</div>
+        </div>
+    </div>
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
